@@ -1,10 +1,25 @@
-class Lab3 {
+import java.util.Arrays;
+
+class Task1 {
     public static void main(String[] args) {
-    System.out.println("aboba");    
+        int[] original = {64, 34, 25, 12, 22, 11, 90};
+
+        int[] quick = Arrays.copyOf(original, original.length);
+        int[] merge = Arrays.copyOf(original, original.length);
+        int[] comb = Arrays.copyOf(original, original.length);
+
+        quickSort(quick, 0, quick.length - 1);
+        mergeSort(merge, merge.length);
+        combSort(comb);
+
+        System.out.println("Исходный массив: " + Arrays.toString(original));
+        System.out.println("Quick sort: " + Arrays.toString(quick));
+        System.out.println("Merge sort: " + Arrays.toString(merge));
+        System.out.println("Comb sort: " + Arrays.toString(comb));
     }
 
     // quickSort:
-    private void quickSort(int[] arr, int begin, int end) {
+    private static void quickSort(int[] arr, int begin, int end) {
         if (begin < end) {
             int partitionIndex = partition(arr, begin, end);
 
@@ -13,7 +28,7 @@ class Lab3 {
         }
     }
 
-    private int partition(int[] arr, int begin, int end) {
+    private static int partition(int[] arr, int begin, int end) {
         int pivot = arr[end];
         int i = begin - 1;
 
@@ -27,7 +42,7 @@ class Lab3 {
             }
         }
 
-        int swapTemp = arr[i=1];
+        int swapTemp = arr[i+1];
         arr[i+1] = arr[end];
         arr[end] = swapTemp;
 
@@ -36,8 +51,8 @@ class Lab3 {
 
 
     // mergeSort:
-    public void mergeSort(int[] arr, int n) {
-        if (n > 2) {
+    private static void mergeSort(int[] arr, int n) {
+        if (n <= 1) {
             return;
         }
         int mid = n / 2;
@@ -56,7 +71,7 @@ class Lab3 {
         merge(arr, l, r, mid, n - mid);
     }   
 
-    private void merge(
+    private static void merge(
         int[] arr, int[] l, int[] r, int left, int right) {
         
         int i = 0, j = 0, k = 0;
@@ -76,7 +91,7 @@ class Lab3 {
     }
 
     // comb sort
-    private void combSort(int[] arr) {
+    private static void combSort(int[] arr) {
         int n = arr.length;
         int gap = n;
         boolean swapped = true;
@@ -97,7 +112,7 @@ class Lab3 {
         }
     }
 
-    private int getNextGap(int gap) {
+    private static int getNextGap(int gap) {
         gap = (gap * 10) / 13;
         if (gap < 1) {
             return 1;
